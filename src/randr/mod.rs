@@ -1,3 +1,5 @@
+use std::fmt;
+
 pub mod dummy;
 pub mod hyprland;
 
@@ -47,16 +49,20 @@ impl<'a> Configure<'a> {
     }
 }
 
-impl<'a> ToString for Configure<'a> {
-    fn to_string(&self) -> String {
-        match self {
-            Configure::Mirror(_) => "Mirror".to_string(),
-            Configure::LeftOf(_) => "Left of".to_string(),
-            Configure::RightOf(_) => "Right of".to_string(),
-            Configure::Below(_) => "Below".to_string(),
-            Configure::Above(_) => "Above".to_string(),
-            Configure::Zero => "Zero".to_string(),
-        }
+impl<'a> fmt::Display for Configure<'a> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "{}",
+            match self {
+                Configure::Mirror(_) => "Mirror",
+                Configure::LeftOf(_) => "Left of",
+                Configure::RightOf(_) => "Right of",
+                Configure::Below(_) => "Below",
+                Configure::Above(_) => "Above",
+                Configure::Zero => "Zero",
+            }
+        )
     }
 }
 
